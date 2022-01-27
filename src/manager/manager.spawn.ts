@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import { isAvailable } from "spawn";
 import { countRole } from "utils/memory.role";
 
@@ -24,13 +23,13 @@ export const spawnManager = {
             const upgrader = countRole('upgrader')
 
             if (harvesters < screepAmount.harvester) {
-                const newName: string = 'Harvester' + stringify(Game.time);
+                const newName: string = 'Harvester' + String(Game.time);
                 console.log('Spawning new harvester: ' + newName);
                 Game.spawns[mySpawn].spawnCreep([WORK, CARRY, MOVE], newName,
                     { memory: { role: 'harvester' } });
             }
             else if (builders < screepAmount.builder) {
-                const newName: string = 'Builders' + stringify(Game.time);
+                const newName: string = 'Builders' + String(Game.time);
                 const builderBody: BodyPartConstant[] = [WORK, CARRY, MOVE, MOVE]
                 if (_.sum(builderBody, part => BODYPART_COST[part]) >
                     Game.spawns[mySpawn].store.getFreeCapacity(RESOURCE_ENERGY)) {
@@ -39,7 +38,7 @@ export const spawnManager = {
                         { memory: { role: 'builder' } })
                 }
             } else if (upgrader < screepAmount.upgrader) {
-                const newName: string = 'Upgrader' + stringify(Game.time);
+                const newName: string = 'Upgrader' + String(Game.time);
                 console.log('Spawning new upgrader: ' + newName);
                 Game.spawns[mySpawn].spawnCreep([WORK, CARRY, CARRY, MOVE], newName,
                     { memory: { role: 'upgrader' } })

@@ -1,3 +1,4 @@
+import { constructionManager } from "manager/constructor";
 import { spawnManager } from "manager/manager.spawn";
 import roleBuilder, { Builder } from 'roles/builder';
 import roleHarvester from 'roles/harvester';
@@ -19,6 +20,7 @@ function unwrappedLoop(): void {
   runCreep()
   spawnManager.spawn()
   infraManager.run()
+  constructionManager.run()
 }
 
 function cleanMemory(): void {

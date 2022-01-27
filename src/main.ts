@@ -1,10 +1,10 @@
+import { spawnManager } from "manager/manager.spawn";
 import roleBuilder, { Builder } from 'roles/builder';
 import roleHarvester from 'roles/harvester';
 import roleUpgrader, { Upgrader } from 'roles/upgrader';
 import ErrorMapper from 'utils/ErrorMapper';
+import { infraManager } from "./manager/manager.infra";
 import { runTower } from './tower';
-import { spawnManager } from "manager.spawn"
-import { infraManager } from "./manager/manager.infra"
 
 declare global {
   interface CreepMemory {
@@ -14,16 +14,19 @@ declare global {
 
 function unwrappedLoop(): void {
   console.log(`Current game tick is ${Game.time}`);
+  cleanMemory()
+  runAllTowers()
+  runCreep()
+  spawnManager.spawn()
+  infraManager.run()
+}
 
+function cleanMemory(): void {
   // Automatically delete memory of missing creeps
   Object.keys(Memory.creeps)
     .filter(name => !(name in Game.creeps))
     .forEach(name => delete Memory.creeps[name]);
-
-  runAllTowers()
-  runCreep()
-
-};
+}
 
 function runAllTowers(): void {
   Object.values(Game.rooms).forEach(room => {
@@ -35,7 +38,7 @@ function runAllTowers(): void {
       });
     }
   })
-};
+}
 
 function runCreep(): void {
   Object.values(Game.creeps).forEach(creep => {
@@ -49,10 +52,8 @@ function runCreep(): void {
       roleBuilder.run(creep as Builder);
     }
   });
-  
-  spawnManager.spawn()
-  infraManager.run()
-  
+
+
   // Automatically delete memory of missing creeps
   Object.keys(Memory.creeps)
     .filter(name => !(name in Game.creeps))
@@ -65,7 +66,8 @@ const loop = ErrorMapper.wrapLoop(unwrappedLoop);
 
 export {
   loop,
-  unwrappedLoop,
+  cleanMemory,
   runCreep,
   runAllTowers
+
 };

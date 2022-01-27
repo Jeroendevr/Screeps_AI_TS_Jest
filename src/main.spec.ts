@@ -1,5 +1,5 @@
 import { mockGlobal, mockInstanceOf, mockStructure } from 'screeps-jest';
-import { unwrappedLoop } from './main';
+import { unwrappedLoop, runCreep, runAllTowers } from './main';
 import roleBuilder from './roles/builder';
 import roleHarvester from './roles/harvester';
 import roleUpgrader from './roles/upgrader';
@@ -66,7 +66,7 @@ describe('main loop', () => {
     }
     );
     mockGlobal<Memory>('Memory', { creeps: {} });
-    unwrappedLoop();
+    runCreep()
     expect(roleBuilder.run).toHaveBeenCalledWith(builder);
     expect(roleHarvester.run).toHaveBeenCalledWith(harvester);
     expect(roleUpgrader.run).toHaveBeenCalledWith(upgrader);
@@ -109,21 +109,10 @@ describe('main loop', () => {
         noOnesRoom,
         someoneElsesRoom
       },
-      time: 1,
-      spawns: {
-        Spawn1: {
-          room: {
-            myRoomWithoutTowers: {
-            },
-            findPath,
-            name: 'W1H1',
-          },
-          pos: [],
-        }
-      }
-    }),
-      mockGlobal<Memory>('Memory', { creeps: {} });
-    unwrappedLoop();
+      time: 1
+    });
+    mockGlobal<Memory>('Memory', { creeps: {} });
+    runAllTowers();
     expect(runTower).toHaveBeenCalledWith(tower1);
     expect(runTower).toHaveBeenCalledWith(tower2);
 

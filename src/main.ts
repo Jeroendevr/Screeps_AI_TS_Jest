@@ -15,6 +15,17 @@ declare global {
 function unwrappedLoop(): void {
   console.log(`Current game tick is ${Game.time}`);
 
+  // Automatically delete memory of missing creeps
+  Object.keys(Memory.creeps)
+    .filter(name => !(name in Game.creeps))
+    .forEach(name => delete Memory.creeps[name]);
+
+  runAllTowers()
+  runCreep()
+
+};
+
+function runAllTowers(): void {
   Object.values(Game.rooms).forEach(room => {
     if (room.controller?.my) {
       const towers = room.find<StructureTower>(FIND_MY_STRUCTURES, { filter: { structureType: STRUCTURE_TOWER } });
@@ -23,8 +34,10 @@ function unwrappedLoop(): void {
         runTower(tower);
       });
     }
-  });
+  })
+};
 
+function runCreep(): void {
   Object.values(Game.creeps).forEach(creep => {
     if (creep.memory.role === 'harvester') {
       roleHarvester.run(creep);
@@ -36,13 +49,10 @@ function unwrappedLoop(): void {
       roleBuilder.run(creep as Builder);
     }
   });
-
+  
   spawnManager.spawn()
   infraManager.run()
-
-
-
-
+  
   // Automatically delete memory of missing creeps
   Object.keys(Memory.creeps)
     .filter(name => !(name in Game.creeps))
@@ -55,5 +65,7 @@ const loop = ErrorMapper.wrapLoop(unwrappedLoop);
 
 export {
   loop,
-  unwrappedLoop
+  unwrappedLoop,
+  runCreep,
+  runAllTowers
 };

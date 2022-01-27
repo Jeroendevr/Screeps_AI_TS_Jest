@@ -1,6 +1,6 @@
 import { constructionManager } from "manager/constructor";
 import { spawnManager } from "manager/manager.spawn";
-import roleBuilder, { Builder } from 'roles/builder';
+import { Builder, roleBuilder } from 'roles/builder';
 import roleHarvester from 'roles/harvester';
 import roleUpgrader, { Upgrader } from 'roles/upgrader';
 import ErrorMapper from 'utils/ErrorMapper';

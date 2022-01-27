@@ -1,10 +1,10 @@
 import { mockGlobal, mockInstanceOf, mockStructure } from 'screeps-jest';
-import { runCreep, runAllTowers, cleanMemory } from './main';
-import roleBuilder from './roles/builder';
+import { mockRoomPositionConstructor } from 'screeps-jest/dist/src/mocking';
+import { cleanMemory, runAllTowers, runCreep } from './main';
+import { roleBuilder } from './roles/builder';
 import roleHarvester from './roles/harvester';
 import roleUpgrader from './roles/upgrader';
 import { runTower } from './tower';
-import { mockRoomPositionConstructor } from 'screeps-jest/dist/src/mocking';
 
 jest.mock('roles/builder');
 jest.mock('roles/harvester');

@@ -1,3 +1,4 @@
+
 export interface Builder extends Creep {
   memory: BuilderMemory;
 }
@@ -19,12 +20,7 @@ const roleBuilder = {
     }
 
     if (creep.memory.building) {
-      const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-      if (targets.length) {
-        if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
-        }
-      }
+      work_on_construction_sites(creep)
     } else {
       const sources = creep.room.find(FIND_SOURCES);
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
@@ -34,4 +30,29 @@ const roleBuilder = {
   }
 };
 
-export default roleBuilder;
+function work_on_construction_sites(creep: Builder): void {
+  //TODO extensions before roads
+  const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+  if (targets.length) {
+    const extensions = targets.filter(ext => ext.structureType == STRUCTURE_EXTENSION)
+    console.log(extensions)
+    if (extensions.length) {
+      move_to_target(creep, extensions)
+    }
+    else {
+      move_to_target(creep, targets)
+    };
+  }
+}
+
+function move_to_target(creep: Builder, targets: ConstructionSite[]): void {
+  if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
+    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+  }
+}
+
+export {
+  roleBuilder,
+  work_on_construction_sites
+};
+

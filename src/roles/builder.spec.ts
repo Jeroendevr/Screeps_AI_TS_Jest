@@ -1,8 +1,14 @@
 import { mockInstanceOf } from 'screeps-jest';
-import roleBuilder, { Builder } from './builder';
+import { Builder, roleBuilder, work_on_construction_sites } from './builder';
 
-const cs1 = mockInstanceOf<ConstructionSite>({ id: 'cs1' });
-const cs2 = mockInstanceOf<ConstructionSite>({ id: 'cs2' });
+const cs1 = mockInstanceOf<ConstructionSite>({
+  id: 'cs1',
+  structureType: STRUCTURE_EXTENSION
+});
+const cs2 = mockInstanceOf<ConstructionSite>({
+  id: 'cs2',
+  structureType: STRUCTURE_ROAD
+});
 const source1 = mockInstanceOf<Source>({ id: 'source1' });
 const source2 = mockInstanceOf<Source>({ id: 'source2' });
 
@@ -36,7 +42,7 @@ describe('Builder role', () => {
       build: () => OK
     });
 
-    roleBuilder.run(creep);
+    work_on_construction_sites(creep);
     expect(creep.room.find).toHaveBeenCalledWith(FIND_CONSTRUCTION_SITES);
     expect(creep.build).not.toHaveBeenCalled();
   });

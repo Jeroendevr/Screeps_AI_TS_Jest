@@ -23,9 +23,10 @@ export const spawnManager = {
             const upgrader = countRole('upgrader')
 
             if (harvesters < screepAmount.harvester) {
+                const creepBody: BodyPartConstant[] = [WORK, CARRY, MOVE]
                 const newName: string = 'Harvester' + String(Game.time);
                 console.log('Spawning new harvester: ' + newName);
-                Game.spawns[mySpawn].spawnCreep([WORK, CARRY, MOVE], newName,
+                Game.spawns[mySpawn].spawnCreep(creepBody, newName,
                     { memory: { role: 'harvester' } });
             }
             else if (builders < screepAmount.builder) {
@@ -48,3 +49,11 @@ export const spawnManager = {
 }
 
 
+function sufficientCapacity(creepSpawn: StructureSpawn, creepBody: BodyPartConstant[]): Boolean {
+    if (_.sum(creepBody, part => BODYPART_COST[part]) >
+        creepSpawn.store.getFreeCapacity(RESOURCE_ENERGY)) {
+        return false
+    } else {
+        return true
+    }
+};

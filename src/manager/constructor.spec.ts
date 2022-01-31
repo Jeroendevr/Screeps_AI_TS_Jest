@@ -20,4 +20,5 @@ const wantedRoomPos = mockInstanceOf<RoomPosition>({
 
 it("returns building layout", () => {
     expect(building_layout(myRoompos)).toEqual([21, 19, "extension"])
+    expect(building_layout(myRoompos)).toEqual([21, 19, "extension"])
 })

@@ -41,7 +41,7 @@ function work_on_construction_sites(creep: Builder): void {
   //TODO extensions before roads
   const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
   if (targets.length) {
-    const extensions = targets.filter(ext => ext.structureType == STRUCTURE_EXTENSION)
+    const extensions = creep.room.find(FIND_CONSTRUCTION_SITES, [STRUCTURE_EXTENSION])
     // console.log(extensions)
     if (extensions.length) {
       move_to_target(creep, extensions)

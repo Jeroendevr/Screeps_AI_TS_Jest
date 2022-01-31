@@ -1,10 +1,10 @@
-import { constructionManager } from "manager/constructor";
-import { spawnManager } from "manager/manager.spawn";
+import { constructionManager } from 'manager/constructor';
+import { infraManager } from 'manager/manager.infra';
+import { spawnManager } from 'manager/manager.spawn';
 import { Builder, roleBuilder } from 'roles/builder';
 import roleHarvester from 'roles/harvester';
 import roleUpgrader, { Upgrader } from 'roles/upgrader';
 import ErrorMapper from 'utils/ErrorMapper';
-import { infraManager } from "./manager/manager.infra";
 import { runTower } from './tower';
 
 declare global {
@@ -54,12 +54,6 @@ function runCreep(): void {
       roleBuilder.run(creep as Builder);
     }
   });
-
-
-  // Automatically delete memory of missing creeps
-  Object.keys(Memory.creeps)
-    .filter(name => !(name in Game.creeps))
-    .forEach(name => delete Memory.creeps[name]);
 }
 
 // When compiling TS to JS and bundling with rollup, the line numbers and file names in error messages change

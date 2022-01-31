@@ -4,7 +4,7 @@ function building_layout(pos: RoomPosition): [number, number, string] {
      *
      * @returns [x pos , y pos, A structure constant]
      */
-    var next_structure_site = gcl_lv2_structures[0]
+    let next_structure_site = gcl_lv2_structures[0]
     next_structure_site[0] = next_structure_site[0] + pos.x
     next_structure_site[1] = next_structure_site[1] + pos.y
 

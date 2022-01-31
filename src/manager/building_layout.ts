@@ -1,13 +1,23 @@
 
 function building_layout(pos: RoomPosition): [number, number, string] {
-    // Returns an array with position relative to the spawn where a certain structure should be placed
-    return gcl_lv2_structures[0]
+    /**
+     *
+     * @returns [x pos , y pos, A structure constant]
+     */
+    var next_structure_site = gcl_lv2_structures[0]
+    next_structure_site[0] = next_structure_site[0] + pos.x
+    next_structure_site[1] = next_structure_site[1] + pos.y
 
+    return next_structure_site
 }
 
-const gcl_lv2_structures: [number, number, string][] = [
-    [+1, -1, STRUCTURE_EXTENSION]
-]
+const gcl_lv2_structures: [number, number, string][] =
+    /*
 
-export { building_layout };
+    */
+    [
+        [+1, -1, STRUCTURE_EXTENSION]
+    ]
+
+export { building_layout }
 

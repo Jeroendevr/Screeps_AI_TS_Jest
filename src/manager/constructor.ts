@@ -1,4 +1,6 @@
+import { building_layout } from "./building_layout"
 
+// Responsible for structures
 const constructionManager = {
     run: function (): void {
         if (Game.gcl.level < 2) {
@@ -11,7 +13,7 @@ const constructionManager = {
         const mySpawn = 'Spawn1'
         const mySpawnObj = Game.spawns[mySpawn]
         const roomName = mySpawnObj.room.name
-        const location: RoomPosition = find_suitable_extension_site(mySpawnObj.pos, roomName)
+        let location: RoomPosition = find_suitable_extension_site(mySpawnObj.pos, roomName)
         this.createExtenstions(location)
     },
 
@@ -21,7 +23,8 @@ const constructionManager = {
 }
 
 function find_suitable_extension_site(spawn_pos: RoomPosition, roomName: string): RoomPosition {
-    let extension_site = new RoomPosition(spawn_pos.x + 1, spawn_pos.y - 1, roomName)
+    const layout = building_layout(spawn_pos)
+    let extension_site = new RoomPosition(layout[0], layout[1] - 1, roomName)
     return extension_site
 }
 

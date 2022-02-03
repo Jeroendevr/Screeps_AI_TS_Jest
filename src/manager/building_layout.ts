@@ -12,13 +12,12 @@ function building_layout(pos: RoomPosition): [number, number, string] {
 }
 
 
-
 function gcl_lv2_structures(nr: number) {
     const structure = new Map<number, [number, number, string]>([
         [1, [+1, -1, "extension"]],
         [2, [+0, -2, "extension"]]
     ])
-    const arr = structure.get(2)
+    const arr = structure.get(nr)
     return arr
 }
 export { building_layout }

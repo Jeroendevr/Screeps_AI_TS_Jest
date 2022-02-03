@@ -10,7 +10,7 @@ const constructionManager = {
     },
 
     gcl_lv2: function (): void {
-        const mySpawn = Game.spawns[0].name
+        const mySpawn = 'Spawn1'
         const mySpawnObj = Game.spawns[mySpawn]
         const roomName = mySpawnObj.room.name
         let location: RoomPosition = find_suitable_extension_site(mySpawnObj.pos, roomName)
@@ -24,7 +24,8 @@ const constructionManager = {
 
 function find_suitable_extension_site(spawn_pos: RoomPosition, roomName: string): RoomPosition {
     const layout = building_layout(spawn_pos)
-    let extension_site = new RoomPosition(layout[0], layout[1], roomName)
+    console.log(layout)
+    const extension_site = new RoomPosition(layout[0], layout[1], roomName)
     return extension_site
 }
 

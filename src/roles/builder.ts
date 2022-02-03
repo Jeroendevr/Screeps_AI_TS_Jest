@@ -29,11 +29,13 @@ const roleBuilder = {
 
 function gather_resource(creep: Builder): void {
   // Check if spawn if full
-  const spawn = creep.room.find(FIND_STRUCTURES, [STRUCTURE_SPAWN])
-  // if (spawn.length)
-  const sources = creep.room.find(FIND_SOURCES);
-  if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-    creep.moveTo(sources[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+
+  const spawn = creep.room.find(FIND_MY_SPAWNS)
+  if (spawn.length) {
+    const sources = creep.room.find(FIND_SOURCES);
+    if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
+      creep.moveTo(sources[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+    }
   }
 }
 

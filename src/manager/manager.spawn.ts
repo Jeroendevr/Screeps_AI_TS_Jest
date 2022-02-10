@@ -23,7 +23,7 @@ const spawnManager = {
             const upgrader = countRole('upgrader')
 
             if (harvesters < screepAmount.harvester) {
-                const creepBody: BodyPartConstant[] = [WORK, CARRY, MOVE]
+                const creepBody: BodyPartConstant[] = [WORK, CARRY, MOVE, WORK]
                 if (sufficientCapacity(Game.spawns[mySpawn], creepBody) === true) {
                     const newName: string = 'Harvester' + String(Game.time);
                     console.log('Spawning new harvester: ' + newName);

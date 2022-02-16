@@ -52,7 +52,11 @@ function runCreep(): void {
       roleUpgrader.run(creep as Upgrader);
     }
     if (creep.memory.role === 'builder') {
-      roleBuilder.run(creep as Builder);
+      try {
+        roleBuilder.run(creep as Builder);
+      } catch (error) {
+        console.log(creep.memory.role + error)
+      }
     }
     if (creep.memory.role === 'koerier') {
       roleKoerier.run(creep as Koerier);

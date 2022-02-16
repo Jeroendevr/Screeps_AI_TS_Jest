@@ -3,6 +3,7 @@ import { infraManager } from 'manager/manager.infra';
 import { spawnManager } from 'manager/manager.spawn';
 import { Builder, roleBuilder } from 'roles/builder';
 import roleHarvester from 'roles/harvester';
+import { Koerier, roleKoerier } from 'roles/koerier';
 import roleUpgrader, { Upgrader } from 'roles/upgrader';
 import ErrorMapper from 'utils/ErrorMapper';
 import { runTower } from './tower';
@@ -52,6 +53,9 @@ function runCreep(): void {
     }
     if (creep.memory.role === 'builder') {
       roleBuilder.run(creep as Builder);
+    }
+    if (creep.memory.role === 'koerier') {
+      roleKoerier.run(creep as Koerier);
     }
   });
 }

@@ -1,5 +1,4 @@
-
-export interface Builder extends Creep {
+interface Builder extends Creep {
   memory: BuilderMemory;
 }
 
@@ -62,6 +61,7 @@ function move_to_target(creep: Builder, targets: ConstructionSite[]): void {
 
 export {
   roleBuilder,
-  work_on_construction_sites
+  work_on_construction_sites,
+  Builder
 };
 

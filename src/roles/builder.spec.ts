@@ -1,5 +1,5 @@
 import { mockInstanceOf } from 'screeps-jest';
-import { Builder, roleBuilder, work_on_construction_sites } from './builder';
+import { Builder, move_to_target, roleBuilder, work_on_construction_sites } from './builder';
 
 const cs1 = mockInstanceOf<ConstructionSite>({
   id: 'cs1',
@@ -64,6 +64,23 @@ describe('Builder role', () => {
     expect(creep.room.find).toHaveBeenCalledWith(FIND_CONSTRUCTION_SITES);
     expect(creep.build).toHaveBeenCalledWith(cs1);
     expect(creep.moveTo).toHaveBeenCalledWith(cs1, expect.anything());
+  });
+
+  it('moves towards construction site, while it has energy but is out of range and has only roads', () => {
+    const creep = mockInstanceOf<Builder>({
+      store: { energy: 50 },
+      memory: {
+        building: true,
+        role: 'builder'
+      },
+      room: { find: () => [cs2] },
+      build: () => ERR_NOT_IN_RANGE,
+      moveTo: () => OK
+    })
+    const targets = creep.room.find(FIND_CONSTRUCTION_SITES)
+    roleBuilder.run(creep);
+    expect(creep.memory.building).toBeTruthy();
+    expect(move_to_target).toHaveBeenCalledWith(creep, targets)
   });
 
   it("harvests, when it's near a source and not full", () => {

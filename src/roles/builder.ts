@@ -42,8 +42,8 @@ function work_on_construction_sites(creep: Builder): void {
   //TODO extensions before roads
   const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
   if (targets.length) {
-    const extensions = creep.room.find(FIND_CONSTRUCTION_SITES, [STRUCTURE_EXTENSION])
-    // console.log(extensions)
+    const extensions = creep.room.find(FIND_CONSTRUCTION_SITES, { filter: { structureType: STRUCTURE_EXTENSION } })
+    console.log(extensions)
     if (extensions.length) {
       move_to_target(creep, extensions)
     }
@@ -62,6 +62,7 @@ function move_to_target(creep: Builder, targets: ConstructionSite[]): void {
 export {
   roleBuilder,
   work_on_construction_sites,
-  Builder
+  Builder,
+  move_to_target,
 };
 

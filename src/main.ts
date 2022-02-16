@@ -22,6 +22,7 @@ function unwrappedLoop(): void {
   spawnManager.spawn()
   infraManager.run()
   constructionManager.run()
+  // console.log(Game.rooms['E54N17'].find(FIND_CONSTRUCTION_SITES, { filter: { structureType: STRUCTURE_EXTRACTOR } }).length)
 }
 
 function cleanMemory(): void {
@@ -30,6 +31,8 @@ function cleanMemory(): void {
     .filter(name => !(name in Game.creeps))
     .forEach(name => delete Memory.creeps[name]);
 }
+
+
 
 function runAllTowers(): void {
   Object.values(Game.rooms).forEach(room => {

@@ -32,7 +32,7 @@ const spawnManager = {
                 }
             }
             else if (builders < screepAmount.builder) {
-                const newName: string = 'Builders' + String(Game.time);
+                const newName: string = 'Builder' + String(Game.time);
                 const builderBody: BodyPartConstant[] = [WORK, CARRY, MOVE, MOVE]
                 if (sufficientCapacity(Game.spawns[mySpawn], builderBody) === true) {
                     console.log('Spwaning new builders: ' + newName);

@@ -96,4 +96,4 @@ $RECYCLE.BIN/
 package.json
 src/zandbak.js
 src/zandbak.ts
-.vscode/
+.vscode/*

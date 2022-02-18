@@ -10,7 +10,7 @@ const spawnManager = {
             'builder'
         ]
         const screepAmount = {
-            harvester: 3,
+            harvester: 1,
             builder: 2,
             upgrader: 2
         };

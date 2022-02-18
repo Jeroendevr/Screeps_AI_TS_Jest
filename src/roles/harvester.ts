@@ -1,3 +1,10 @@
+interface Harvester extends Creep {
+  memory: HarvesterMemory
+}
+interface HarvesterMemory extends CreepMemory {
+  harvesting: boolean;
+}
+
 const roleHarvester = {
 
   run(creep: Creep): void {

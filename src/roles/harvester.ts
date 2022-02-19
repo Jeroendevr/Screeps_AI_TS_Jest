@@ -37,5 +37,9 @@ function isToBeFilled(structure: Structure): boolean {
   return false;
 }
 
-export default roleHarvester;
-export { isToBeFilled };
+export {
+  roleHarvester,
+  Harvester,
+  isToBeFilled
+};
+

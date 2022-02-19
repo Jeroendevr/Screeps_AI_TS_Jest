@@ -17,8 +17,21 @@ const roleKoerier = {
             creep.memory.hauling = true;
             creep.say('💼 Hauling')
         }
+        if (creep.memory.hauling) {
+            haul_energy(creep)
+        } else {
+            deposit_energy(creep)
+        }
 
     }
+}
+
+function haul_energy(creep: Koerier): void {
+    //find harvester with energy and haul withdraw from it
+    const harvesters = creep.room.find(FIND_MY_CREEPS, { filter: { Memory: { role: 'harvester' } } })
+}
+function deposit_energy(creep: Koerier): void {
+
 }
 
 export {

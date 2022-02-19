@@ -1,5 +1,6 @@
 import { mockInstanceOf } from 'screeps-jest';
 import { Builder, roleBuilder, work_on_construction_sites } from './builder';
+var _ = require('lodash')
 
 const cs1 = mockInstanceOf<ConstructionSite>({
   id: 'cs1',

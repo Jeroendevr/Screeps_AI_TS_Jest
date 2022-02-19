@@ -2,7 +2,7 @@ import { constructionManager } from 'manager/constructor';
 import { infraManager } from 'manager/manager.infra';
 import { spawnManager } from 'manager/manager.spawn';
 import { Builder, roleBuilder } from 'roles/builder';
-import roleHarvester from 'roles/harvester';
+import { roleHarvester } from 'roles/harvester';
 import { Koerier, roleKoerier } from 'roles/koerier';
 import roleUpgrader, { Upgrader } from 'roles/upgrader';
 import ErrorMapper from 'utils/ErrorMapper';

@@ -1,6 +1,5 @@
+import { mockGlobal, mockInstanceOf } from 'screeps-jest';
 import { countRole } from "./memory.role";
-import { mockGlobal, mockInstanceOf } from 'screeps-jest'
-import roleHarvester from '../roles/harvester'
 
 jest.mock('roles/harvester');
 

@@ -10,9 +10,10 @@ const spawnManager = {
             'builder'
         ]
         const screepAmount = {
-            harvester: 0,
+            harvester: 1,
+            koerier: 1,
             builder: 1,
-            upgrader: 2
+            upgrader: 1,
         };
 
         const mySpawn = 'Spawn1'
@@ -21,6 +22,7 @@ const spawnManager = {
             const harvesters = countRole('harvester')
             const builders = countRole('builder')
             const upgrader = countRole('upgrader')
+            const koerier = countRole('koerier')
 
             if (harvesters < screepAmount.harvester) {
                 const creepBody: BodyPartConstant[] = [WORK, CARRY, MOVE, WORK]
@@ -46,6 +48,14 @@ const spawnManager = {
                     console.log('Spawning new upgrader: ' + newName);
                     Game.spawns[mySpawn].spawnCreep(creepBody, newName,
                         { memory: { role: 'upgrader' } })
+                }
+            } else if (koerier < screepAmount.koerier) {
+                const creepBody: BodyPartConstant[] = [CARRY, CARRY, CARRY, CARRY, MOVE]
+                if (sufficientCapacity(Game.spawns[mySpawn], creepBody) === true) {
+                    const newName: string = 'Koerier' + String(Game.time);
+                    console.log('Spawning new koerier: ' + newName);
+                    Game.spawns[mySpawn].spawnCreep(creepBody, newName,
+                        { memory: { role: 'koerier' } })
                 }
             }
         }

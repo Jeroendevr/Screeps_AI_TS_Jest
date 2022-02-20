@@ -68,11 +68,12 @@ describe('Harvester role', () => {
         transfer: () => OK,
         pos: {
           y: undefined,
-          x: undefined
+          x: undefined,
+          findInRange: () => undefined
         },
       })
 
-      roleHarvester.run(creep);
+      roleHarvester.transferEnergy(creep);
       expect(creep.room.find).toHaveBeenCalledWith(FIND_MY_STRUCTURES, { filter: isToBeFilled });
       expect(creep.moveTo).not.toHaveBeenCalled();
       expect(creep.transfer).not.toHaveBeenCalled();

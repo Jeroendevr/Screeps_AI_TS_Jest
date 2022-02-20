@@ -24,7 +24,7 @@ const constructionManager = {
 
 function find_suitable_extension_site(spawn_pos: RoomPosition, roomName: string): RoomPosition {
     const layout = building_layout(spawn_pos)
-    console.log(layout)
+    // console.log(layout)
     const extension_site = new RoomPosition(layout[0], layout[1], roomName)
     return extension_site
 }

@@ -29,6 +29,7 @@ const roleKoerier = {
 function haul_energy(creep: Koerier): void {
     //find harvester with energy and haul withdraw from it
     const harvesters = creep.room.find(FIND_MY_CREEPS, { filter: { Memory: { role: 'harvester' } } })
+    creep.moveTo(harvesters[0], { visualizePathStyle: { stroke: '#95e0e8' } })
 }
 function deposit_energy(creep: Koerier): void {
 

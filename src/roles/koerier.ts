@@ -1,3 +1,5 @@
+import { isToBeFilled } from './harvester';
+
 interface Koerier extends Creep {
     memory: KoerierMemory;
 }
@@ -20,9 +22,18 @@ const roleKoerier = {
         if (creep.memory.hauling) {
             haul_energy(creep)
         } else {
-            deposit_energy(creep)
+            this.transferEnergy
         }
 
+    },
+    transferEnergy(creep: Creep): void {
+        const targets = creep.room.find(FIND_MY_STRUCTURES, { filter: isToBeFilled });
+
+        if (targets.length > 0) {
+            if (creep.transfer(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+            }
+        }
     }
 }
 
@@ -30,9 +41,6 @@ function haul_energy(creep: Koerier): void {
     //find harvester with energy and haul withdraw from it
     const harvesters = creep.room.find(FIND_MY_CREEPS, { filter: { memory: { role: 'harvester' } } })
     creep.moveTo(harvesters[0], { visualizePathStyle: { stroke: '#95e0e8' } })
-
-}
-function deposit_energy(creep: Koerier): void {
 
 }
 

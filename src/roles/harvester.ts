@@ -1,4 +1,3 @@
-import { roleKoerier } from "./koerier";
 
 interface Harvester extends Creep {
   memory: HarvesterMemory
@@ -45,7 +44,7 @@ function isToBeFilled(structure: Structure): boolean {
 }
 
 function koerierNear(creep: Creep): boolean {
-  const nearbyKoerier = creep.pos.findInRange(FIND_MY_CREEPS, 1, { filter: { Memory: roleKoerier } })
+  const nearbyKoerier = creep.pos.findInRange(FIND_MY_CREEPS, 1, { filter: { memory: { role: 'koerier' } } })
   if (nearbyKoerier.length > 0) {
     creep.transfer(nearbyKoerier[0], RESOURCE_ENERGY)
   }

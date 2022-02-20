@@ -10,8 +10,8 @@ const spawnManager = {
             'builder'
         ]
         const screepAmount = {
-            harvester: 1,
-            builder: 2,
+            harvester: 0,
+            builder: 1,
             upgrader: 2
         };
 
@@ -55,14 +55,16 @@ const spawnManager = {
 
 function sufficientCapacity(creepSpawn: StructureSpawn, creepBody: BodyPartConstant[]): Boolean {
     if (_.sum(creepBody, part => BODYPART_COST[part]) >
-        creepSpawn.store.getUsedCapacity(RESOURCE_ENERGY)) {
+        creepSpawn.room.energyAvailable) {
         return false
     } else {
         return true
     }
 };
 
+
 export {
     spawnManager,
+
     sufficientCapacity
 };

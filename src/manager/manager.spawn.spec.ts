@@ -5,9 +5,9 @@ describe('spawn manager', () => {
     it('calcs body parts', () => {
         const spawn = mockInstanceOf<StructureSpawn>(
             {
-                store:
+                room:
                 {
-                    getUsedCapacity: () => 200
+                    energyAvailable: 200
                 }
             }
         )
@@ -18,4 +18,28 @@ describe('spawn manager', () => {
         expect(sufficientCapacity(spawn, creepBigBody)).toEqual(false);
 
     });
+})
+
+const room = mockInstanceOf<Room>(
+    {
+
+    }
+)
+
+const extension = mockInstanceOf<StructureExtension>(
+    {
+        store:
+        {
+            getUsedCapacity: () => 100
+        }
+    }
+)
+
+describe('spawn related functions', () => {
+    it('calculates extension energy', () => {
+
+        // expect(extensionCapacity(room)).toEqual(100)
+    })
+
+
 })

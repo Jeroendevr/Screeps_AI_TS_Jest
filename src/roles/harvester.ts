@@ -1,3 +1,4 @@
+
 interface Harvester extends Creep {
   memory: HarvesterMemory
 }
@@ -13,13 +14,18 @@ const roleHarvester = {
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
         creep.moveTo(sources[0], { visualizePathStyle: { stroke: '#ffaa00' } });
       }
-    } else {
-      const targets = creep.room.find(FIND_MY_STRUCTURES, { filter: isToBeFilled });
+    } else if (koerierNear(creep)) {
 
-      if (targets.length > 0) {
-        if (creep.transfer(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-          creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
-        }
+    } else {
+      this.transferEnergy(creep)
+    }
+  },
+  transferEnergy(creep: Creep): void {
+    const targets = creep.room.find(FIND_MY_STRUCTURES, { filter: isToBeFilled });
+
+    if (targets.length > 0) {
+      if (creep.transfer(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+        creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
       }
     }
   }
@@ -35,6 +41,15 @@ function isToBeFilled(structure: Structure): boolean {
     return s.energy < s.energyCapacity;
   }
   return false;
+}
+
+function koerierNear(creep: Creep): boolean {
+  const y = creep.pos.y
+  const x = creep.pos.x
+
+  const look = creep.room.lookForAtArea("creep", y + 1, x - 1, y - 1, x + 1)
+  JSON.stringify(look)
+  return false
 }
 
 export {

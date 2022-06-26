@@ -39,6 +39,10 @@ describe('spawn related functions', () => {
     it('calculates extension energy', () => {
 
         // expect(extensionCapacity(room)).toEqual(100)
+    });
+
+    it('confirms screepAmount reached', () => {
+
     })
 
 

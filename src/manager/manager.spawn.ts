@@ -5,10 +5,7 @@ const spawnManager = {
 
     /** @param {Creep} creep **/
     spawn: function (): void {
-        type roles = [
-            'harvester',
-            'builder'
-        ]
+
         const screepAmount = {
             harvester: 1,
             koerier: 1,
@@ -59,6 +56,10 @@ const spawnManager = {
                 }
             }
         }
+    },
+
+    increase_creep: function (): void {
+        // TODO when a role is passed, increase the role count for this creep
     }
 }
 

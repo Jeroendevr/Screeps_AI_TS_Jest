@@ -1,3 +1,5 @@
+import { constructionManager } from "manager/constructor";
+
 interface Builder extends Creep {
   memory: BuilderMemory;
 }
@@ -9,6 +11,14 @@ interface BuilderMemory extends CreepMemory {
 
 const roleBuilder = {
   run(creep: Builder): void {
+
+    if (constructionManager.possible_to_build_tower()) {
+      //
+    }
+    else {
+      //TODO:
+    }
+
     if (creep.memory.building && creep.store[RESOURCE_ENERGY] === 0) {
       creep.memory.building = false;
       creep.say('🔄 harvest');

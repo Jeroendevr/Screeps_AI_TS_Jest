@@ -3,6 +3,8 @@ import { building_layout } from "./building_layout"
 // Responsible for structures
 const constructionManager = {
     run: function (): void {
+
+
         if (Game.gcl.level < 2) {
             this.gcl_lv2()
         }
@@ -19,6 +21,17 @@ const constructionManager = {
 
     createExtenstions: function (location: RoomPosition): void {
         location.createConstructionSite(STRUCTURE_EXTENSION)
+    },
+
+    possible_to_build_tower: function (): boolean {
+        // when asked if it's possible to build a tower. The request should be fufilled.
+        if (Game.gcl.level < 3) {
+            // if gcl is lower then 3 try to find out what the bottle neck is for this level.
+
+        }
+
+
+        return false
     }
 }
 

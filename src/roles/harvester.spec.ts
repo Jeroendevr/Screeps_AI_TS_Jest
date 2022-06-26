@@ -3,6 +3,14 @@ import { isToBeFilled, roleHarvester } from './harvester';
 
 const source1 = mockInstanceOf<Source>({ id: 'source1' as Id<Source> });
 const source2 = mockInstanceOf<Source>({ id: 'source2' as Id<Source> });
+const source3 = mockInstanceOf<Source>({
+  id: 'source3' as Id<Source>,
+  pos: { x: 5, y: 5 }
+});
+const source4 = mockInstanceOf<Source>({
+  id: 'source4' as Id<Source>,
+  pos: { x: 10, y: 10 }
+})
 const extension = mockStructure(STRUCTURE_EXTENSION);
 
 describe('Harvester role', () => {
@@ -12,6 +20,9 @@ describe('Harvester role', () => {
     it("harvests, when it's not full and is near a source", () => {
       const creep = mockInstanceOf<Creep>({
         store: { getFreeCapacity: () => 50 },
+        pos: {
+          findClosestByPath: () => source1
+        },
         room: { find: () => [source1, source2] },
         harvest: () => OK
       });
@@ -23,6 +34,9 @@ describe('Harvester role', () => {
     it("moves to a source, when it's not full and not near a source", () => {
       const creep = mockInstanceOf<Creep>({
         store: { getFreeCapacity: () => 50 },
+        pos: {
+          findClosestByPath: () => source1
+        },
         room: { find: () => [source1, source2] },
         harvest: () => ERR_NOT_IN_RANGE,
         moveTo: () => OK

@@ -1,6 +1,9 @@
-import { mockInstanceOf } from "screeps-jest";
+import { mockInstanceOf, mockGlobal } from "screeps-jest";
 import { mockRoomPositionConstructor } from "screeps-jest/dist/src/mocking";
 import { building_layout } from "./building_layout";
+
+
+
 
 mockRoomPositionConstructor(global);
 const myRoompos = mockInstanceOf<RoomPosition>({

@@ -1,5 +1,8 @@
 import { building_layout } from "./building_layout"
 
+
+
+
 // Responsible for structures
 const constructionManager = {
     run: function (): void {

@@ -1,4 +1,4 @@
-import { mockInstanceOf } from 'screeps-jest';
+import { mockInstanceOf, mockGlobal } from 'screeps-jest';
 import { Builder, roleBuilder, work_on_construction_sites } from './builder';
 var _ = require('lodash')
 
@@ -16,6 +16,11 @@ const source2 = mockInstanceOf<Source>({ id: 'source2' });
 describe('Builder role', () => {
 
   it('works on a construction site, when it has energy and is within range', () => {
+    mockGlobal<Game>('Game', {
+      gcl: {
+        level: 2
+      }
+    })
     const creep = mockInstanceOf<Builder>({
       store: { energy: 50 },
       memory: {
@@ -25,6 +30,7 @@ describe('Builder role', () => {
       room: { find: () => [cs1, cs2] },
       build: () => OK
     });
+
 
     roleBuilder.run(creep);
     expect(creep.memory.building).toBeTruthy();
